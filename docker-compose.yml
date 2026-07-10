@@ -82,6 +82,7 @@ services:
       dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_API_URL: http://localhost:3555/api
+        API_URL_INTERNAL: http://backend:3555/api
     container_name: libraflow-frontend
     restart: always
     ports:

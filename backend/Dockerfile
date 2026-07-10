@@ -2,21 +2,21 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm ci --ignore-scripts
 COPY . .
-RUN npx prisma generate
-RUN npm run build
+RUN DATABASE_URL="mysql://dummy:dummy@localhost:3306/dummy" npx prisma generate
+RUN DATABASE_URL="mysql://dummy:dummy@localhost:3306/dummy" npm run build
 
 # Stage 2: Production Runtime
 FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm ci --omit=dev --ignore-scripts
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
 COPY --from=builder /app/generated ./generated
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=builder /app/node_modules/@prisma/client ./node_modules/@prisma/client
+
 EXPOSE 3555
 CMD ["npm", "run", "start"]

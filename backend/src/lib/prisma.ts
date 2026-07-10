@@ -16,9 +16,6 @@ const adapter = new PrismaMariaDb({
   user: DATABASE_USER,
   password: DATABASE_PASSWORD,
   database: DATABASE_NAME,
-  ssl: {
-    rejectUnauthorized: false,
-  },
   connectTimeout: 10000, // 10 seconds timeout for handshake
   connectionLimit: 2,    // Optimize for serverless: prevent connection starvation on Aiven
 });

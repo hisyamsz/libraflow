@@ -1,9 +1,13 @@
-import { PrismaClient, Role, LoanStatus, BookCondition } from "@prisma/client";
+import { Role, LoanStatus, BookCondition } from "../generated/prisma/index.js";
 import bcrypt from "bcrypt";
-
-const prisma = new PrismaClient();
+import { prisma } from "../dist/lib/prisma.js";
 
 async function main() {
+  await prisma.loan.deleteMany();
+  await prisma.book.deleteMany();
+  await prisma.category.deleteMany();
+  await prisma.user.deleteMany();
+
   const password = await bcrypt.hash("password123", 10);
 
   // 1. Create Categories
@@ -130,7 +134,7 @@ async function main() {
     await prisma.loan.create({
       data: {
         userId: members[i].id,
-        bookId: books[i].id,
+        bookId: books[i % books.length].id,
         status: LoanStatus.RETURNED,
         loanDate: new Date(pastDate.getTime() - 5 * 24 * 60 * 60 * 1000),
         dueDate: pastDate,
