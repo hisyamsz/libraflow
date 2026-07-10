@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `loans` ADD COLUMN `fine` INTEGER NULL DEFAULT 0;

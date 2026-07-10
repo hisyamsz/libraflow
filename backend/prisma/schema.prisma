@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String?  @unique
+  password  String
+  role      Role     @default(MEMBER)
+  nis       String   @unique
+  phone     String?
+  class     String?  @map("class")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  loans     Loan[]
+
+  @@map("users")
+}
+
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  books       Book[]
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("categories")
+}
+
+model Book {
+  id          Int      @id @default(autoincrement())
+  categoryId  Int      @map("category_id")
+  title       String
+  author      String
+  publisher   String?
+  year        Int?
+  isbn        String?  @unique
+  stock       Int      @default(1)
+  coverImage  String?  @map("cover_image")
+  description String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  category    Category @relation(fields: [categoryId], references: [id])
+  loans       Loan[]
+
+  @@index([categoryId], map: "books_category_id_fkey")
+  @@map("books")
+}
+
+model Loan {
+  id            Int            @id @default(autoincrement())
+  userId        Int            @map("user_id")
+  bookId        Int            @map("book_id")
+  status        LoanStatus     @default(PENDING)
+  loanDate      DateTime?      @map("loan_date")
+  dueDate       DateTime?      @map("due_date")
+  returnDate    DateTime?      @map("return_date")
+  bookCondition BookCondition? @map("book_condition")
+  adminNote     String?        @map("admin_note")
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
+  book          Book           @relation(fields: [bookId], references: [id])
+  user          User           @relation(fields: [userId], references: [id])
+
+  @@index([bookId], map: "loans_book_id_fkey")
+  @@index([userId], map: "loans_user_id_fkey")
+  @@map("loans")
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum LoanStatus {
+  PENDING
+  APPROVED
+  RETURNED
+  REJECTED
+}
+
+enum BookCondition {
+  GOOD
+  DAMAGED
+  LOST
+}

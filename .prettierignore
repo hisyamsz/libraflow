@@ -1,0 +1,12 @@
+node_modules/
+.next/
+dist/
+coverage/
+package-lock.json
+public/
+*.png
+*.jpg
+*.ico
+*.xlsx
+.env
+.env.*

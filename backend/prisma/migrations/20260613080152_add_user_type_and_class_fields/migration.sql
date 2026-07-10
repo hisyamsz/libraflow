@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE `users` ADD COLUMN `class` VARCHAR(191) NULL,
+    ADD COLUMN `major` VARCHAR(191) NULL,
+    ADD COLUMN `user_type` ENUM('STUDENT', 'TEACHER') NULL;

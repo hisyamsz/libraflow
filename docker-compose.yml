@@ -1,0 +1,102 @@
+services:
+  db:
+    image: mariadb:10.6
+    container_name: libraflow-db
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: app
+      MARIADB_DATABASE: libraflow_db
+      MARIADB_USER: app
+      MARIADB_PASSWORD: app
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - libraflow-network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: libraflow-phpmyadmin
+    restart: always
+    profiles:
+      - dev
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: app
+      PMA_PASSWORD: app
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - libraflow-network
+
+  migration:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: libraflow-migration
+    command: sh -c "until npx prisma migrate deploy; do echo 'Waiting for database...'; sleep 2; done"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - libraflow-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: libraflow-backend
+    restart: always
+    ports:
+      - "3555:3555"
+    env_file:
+      - ./backend/.env
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3555/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    depends_on:
+      db:
+        condition: service_healthy
+      migration:
+        condition: service_completed_successfully
+    networks:
+      - libraflow-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:3555/api
+    container_name: libraflow-frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - libraflow-network
+
+volumes:
+  mariadb_data:
+
+networks:
+  libraflow-network:
+    driver: bridge
