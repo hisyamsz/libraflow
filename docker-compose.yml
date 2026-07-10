@@ -2,7 +2,7 @@ services:
   db:
     image: mariadb:10.6
     container_name: libraflow-db
-    restart: always
+    restart: "no"
     environment:
       MARIADB_ROOT_PASSWORD: app
       MARIADB_DATABASE: libraflow_db
@@ -23,7 +23,7 @@ services:
   phpmyadmin:
     image: phpmyadmin:latest
     container_name: libraflow-phpmyadmin
-    restart: always
+    restart: "no"
     profiles:
       - dev
     ports:
@@ -58,7 +58,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: libraflow-backend
-    restart: always
+    restart: "no"
     ports:
       - "3555:3555"
     env_file:
@@ -84,7 +84,7 @@ services:
         NEXT_PUBLIC_API_URL: http://localhost:3555/api
         API_URL_INTERNAL: http://backend:3555/api
     container_name: libraflow-frontend
-    restart: always
+    restart: "no"
     ports:
       - "3000:3000"
     env_file:
