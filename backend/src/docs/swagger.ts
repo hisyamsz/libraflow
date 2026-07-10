@@ -6,6 +6,7 @@ const doc = {
     description: "API Documentation for LibraFlow Library Management System",
     version: "1.0.0",
   },
+  basePath: "/api",
   servers: [
     {
       url: "http://localhost:3555/api",

@@ -45,9 +45,10 @@ export function createApp() {
   // Swagger setup
   try {
     // Gunakan fs untuk membaca file JSON karena import type assertion dapat berbeda di tiap versi Node
+    const isDev = process.env.NODE_ENV !== "production";
     const srcPath = path.resolve(process.cwd(), "src/docs/swagger_output.json");
     const distPath = path.resolve(process.cwd(), "dist/docs/swagger_output.json");
-    const swaggerPath = fs.existsSync(distPath) ? distPath : srcPath;
+    const swaggerPath = isDev ? srcPath : (fs.existsSync(distPath) ? distPath : srcPath);
     
     if (fs.existsSync(swaggerPath)) {
       const swaggerDocument = JSON.parse(fs.readFileSync(swaggerPath, "utf8"));
