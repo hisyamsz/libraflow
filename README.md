@@ -1,7 +1,4 @@
 # 📚 LibraFlow
-
-![Status: Maintained](https://img.shields.io/badge/Status-Maintained-brightgreen?style=for-the-badge)
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
@@ -17,7 +14,7 @@
 
 ## 📖 Overview
 
-LibraFlow simplifies library management through automation, real-time analytics, and clean architectural design. It serves as a full-stack open-source solution suitable for schools, universities, or private libraries, completely containerized for instant deployment.
+LibraFlow simplifies library management through automation, real-time analytics, and clean architectural design. It serves as a full-stack solution suitable for schools, universities, or private libraries, completely containerized for instant deployment.
 
 ## ✨ Features
 
@@ -165,12 +162,4 @@ LibraFlow is ready for deployment across modern cloud providers:
 - [ ] Automated email notifications for overdue books.
 - [ ] Support for multiple library branches.
 
-## 🤝 Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
