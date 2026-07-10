@@ -29,15 +29,13 @@ LibraFlow simplifies library management through automation, real-time analytics,
 
 ## 📸 Screenshots
 
-| Landing Page | Admin Dashboard |
+| Homepage | Login Page |
 |:---:|:---:|
-| ![Landing Page](docs/screenshots/landing.png) | ![Admin Dashboard](docs/screenshots/dashboard.png) |
+| ![Homepage](docs/screenshots/homepage.png) | ![Login Page](docs/screenshots/loginpage.png) |
 
-| Book Catalog | Loan Management |
-|:---:|:---:|
-| ![Catalog](docs/screenshots/catalog.png) | ![Loans](docs/screenshots/loan.png) |
-
-*(Add screenshots to the `docs/screenshots` folder)*
+| Admin Dashboard |
+|:---:|
+| ![Admin Dashboard](docs/screenshots/dashboard-admin.png) |
 
 ## 📐 Architecture Diagram
 
