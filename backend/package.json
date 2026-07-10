@@ -9,9 +9,10 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "generate:i18n": "tsx scripts/generate-i18n-types.ts",
+    "generate:swagger": "tsx src/docs/swagger.ts",
     "prebuild": "npm run generate:i18n",
-    "build": "prisma generate && tsc",
-    "predev": "npm run generate:i18n",
+    "build": "npm run generate:swagger && prisma generate && tsc && mkdir -p dist/docs && cp src/docs/swagger_output.json dist/docs/swagger_output.json",
+    "predev": "npm run generate:swagger && npm run generate:i18n",
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
     "prepare": "husky",
@@ -24,7 +25,6 @@
   "dependencies": {
     "@prisma/adapter-mariadb": "^7.7.0",
     "@prisma/client": "^7.7.0",
-    "prisma": "^7.7.0",
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.2",
     "cors": "^2.8.6",
@@ -33,10 +33,10 @@
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.1.1",
     "pdfkit": "^0.19.1",
-    "xlsx": "^0.18.5",
-    "zod": "^4.3.6",
+    "prisma": "^7.7.0",
     "swagger-ui-express": "^5.0.0",
-    "swagger-jsdoc": "^6.2.8"
+    "xlsx": "^0.18.5",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
@@ -48,15 +48,15 @@
     "@types/node": "^25.6.0",
     "@types/pdfkit": "^0.17.6",
     "@types/supertest": "^7.2.0",
+    "@types/swagger-ui-express": "^4.1.6",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.5",
     "supertest": "^7.2.2",
+    "swagger-autogen": "^2.23.7",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.7",
-    "vitest-mock-extended": "^4.0.0",
-    "@types/swagger-ui-express": "^4.1.6",
-    "@types/swagger-jsdoc": "^6.0.4"
+    "vitest-mock-extended": "^4.0.0"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

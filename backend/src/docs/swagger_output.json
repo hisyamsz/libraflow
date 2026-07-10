@@ -1,0 +1,2291 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "LibraFlow API",
+    "description": "API Documentation for LibraFlow Library Management System",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3555",
+      "description": "Development server"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Berhasil login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Berhasil mengambil profil",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ProfileResponse"
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ProfileResponse"
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoryRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoryRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/{id}": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoryRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoryRequest"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/books": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "categoryId",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Books"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "tags": [
+          "Books"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Books"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBookRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBookRequest"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Books"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/loans": {
+      "post": {
+        "tags": [
+          "Loans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLoanRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLoanRequest"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Loans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "all",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/loans/my": {
+      "get": {
+        "tags": [
+          "Loans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/loans/export/pdf": {
+      "get": {
+        "tags": [
+          "Loans"
+        ],
+        "description": "",
+        "produces": [
+          "application/pdf"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/loans/{id}/approve": {
+      "patch": {
+        "tags": [
+          "Loans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/loans/{id}/reject": {
+      "patch": {
+        "tags": [
+          "Loans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RejectLoanRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/RejectLoanRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/loans/{id}/return": {
+      "patch": {
+        "tags": [
+          "Loans"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReturnLoanRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/ReturnLoanRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/stats": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Statistik dashboard admin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/AdminDashboardStats"
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/AdminDashboardStats"
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/dashboard/my-stats": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Statistik dashboard member",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/MemberDashboardStats"
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/MemberDashboardStats"
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/import": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRequest"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/change-password": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}/reset-password": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Kata sandi berhasil direset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ResetPasswordResponse"
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ResetPasswordResponse"
+                    }
+                  },
+                  "xml": {
+                    "name": "main"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "nis": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123"
+          }
+        },
+        "required": [
+          "nis",
+          "password"
+        ],
+        "xml": {
+          "name": "LoginRequest"
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "eyJhbG..."
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "example": 1
+              },
+              "name": {
+                "type": "string",
+                "example": "Ahmad"
+              },
+              "email": {
+                "type": "string",
+                "example": "ahmad@example.com"
+              },
+              "role": {
+                "type": "string",
+                "example": "MEMBER"
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "email",
+              "role"
+            ]
+          }
+        },
+        "required": [
+          "token",
+          "user"
+        ],
+        "xml": {
+          "name": "LoginResponse"
+        }
+      },
+      "ProfileResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Ahmad"
+          },
+          "email": {
+            "type": "string",
+            "example": "ahmad@example.com"
+          },
+          "nis": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "phone": {
+            "type": "string",
+            "example": "08123456789"
+          },
+          "role": {
+            "type": "string",
+            "example": "MEMBER"
+          },
+          "class": {
+            "type": "string",
+            "example": "XII IPA 1"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2024-01-01T00:00:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2024-01-01T00:00:00Z"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "email",
+          "nis",
+          "phone",
+          "role",
+          "class",
+          "createdAt",
+          "updatedAt"
+        ],
+        "xml": {
+          "name": "ProfileResponse"
+        }
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Fiksi"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2024-01-01T00:00:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2024-01-01T00:00:00Z"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "createdAt",
+          "updatedAt"
+        ],
+        "xml": {
+          "name": "Category"
+        }
+      },
+      "CreateCategoryRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Fiksi"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "xml": {
+          "name": "CreateCategoryRequest"
+        }
+      },
+      "UpdateCategoryRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Fiksi Modern"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "xml": {
+          "name": "UpdateCategoryRequest"
+        }
+      },
+      "Book": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "example": "Laskar Pelangi"
+          },
+          "author": {
+            "type": "string",
+            "example": "Andrea Hirata"
+          },
+          "publisher": {
+            "type": "string",
+            "example": "Bentang Pustaka"
+          },
+          "publishedYear": {
+            "type": "number",
+            "example": 2005
+          },
+          "isbn": {
+            "type": "string",
+            "example": "978-979-3062-79-2"
+          },
+          "stock": {
+            "type": "number",
+            "example": 10
+          },
+          "categoryId": {
+            "type": "number",
+            "example": 1
+          },
+          "coverImage": {},
+          "category": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "Fiksi"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2024-01-01T00:00:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2024-01-01T00:00:00Z"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "author",
+          "publisher",
+          "publishedYear",
+          "isbn",
+          "stock",
+          "categoryId",
+          "category",
+          "createdAt",
+          "updatedAt"
+        ],
+        "xml": {
+          "name": "Book"
+        }
+      },
+      "CreateBookRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Laskar Pelangi"
+          },
+          "author": {
+            "type": "string",
+            "example": "Andrea Hirata"
+          },
+          "publisher": {
+            "type": "string",
+            "example": "Bentang Pustaka"
+          },
+          "publishedYear": {
+            "type": "number",
+            "example": 2005
+          },
+          "isbn": {
+            "type": "string",
+            "example": "978-979-3062-79-2"
+          },
+          "stock": {
+            "type": "number",
+            "example": 10
+          },
+          "categoryId": {
+            "type": "number",
+            "example": 1
+          }
+        },
+        "required": [
+          "title",
+          "author",
+          "publisher",
+          "publishedYear",
+          "isbn",
+          "stock",
+          "categoryId"
+        ],
+        "xml": {
+          "name": "CreateBookRequest"
+        }
+      },
+      "UpdateBookRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Laskar Pelangi Baru"
+          },
+          "author": {
+            "type": "string",
+            "example": "Andrea Hirata"
+          },
+          "publisher": {
+            "type": "string",
+            "example": "Bentang Pustaka"
+          },
+          "publishedYear": {
+            "type": "number",
+            "example": 2005
+          },
+          "isbn": {
+            "type": "string",
+            "example": "978-979-3062-79-2"
+          },
+          "stock": {
+            "type": "number",
+            "example": 15
+          },
+          "categoryId": {
+            "type": "number",
+            "example": 1
+          }
+        },
+        "xml": {
+          "name": "UpdateBookRequest"
+        }
+      },
+      "Loan": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "userId": {
+            "type": "number",
+            "example": 1
+          },
+          "bookId": {
+            "type": "number",
+            "example": 1
+          },
+          "loanDate": {
+            "type": "string",
+            "example": "2024-01-01T00:00:00Z"
+          },
+          "dueDate": {
+            "type": "string",
+            "example": "2024-01-08T00:00:00Z"
+          },
+          "returnDate": {},
+          "status": {
+            "type": "string",
+            "example": "PENDING"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "Ahmad"
+              },
+              "nis": {
+                "type": "string",
+                "example": "12345678"
+              },
+              "class": {
+                "type": "string",
+                "example": "XII IPA 1"
+              }
+            },
+            "required": [
+              "name",
+              "nis",
+              "class"
+            ]
+          },
+          "book": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "example": "Laskar Pelangi"
+              },
+              "author": {
+                "type": "string",
+                "example": "Andrea Hirata"
+              }
+            },
+            "required": [
+              "title",
+              "author"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2024-01-01T00:00:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2024-01-01T00:00:00Z"
+          }
+        },
+        "required": [
+          "id",
+          "userId",
+          "bookId",
+          "loanDate",
+          "dueDate",
+          "status",
+          "user",
+          "book",
+          "createdAt",
+          "updatedAt"
+        ],
+        "xml": {
+          "name": "Loan"
+        }
+      },
+      "CreateLoanRequest": {
+        "type": "object",
+        "properties": {
+          "bookId": {
+            "type": "number",
+            "example": 1
+          }
+        },
+        "required": [
+          "bookId"
+        ],
+        "xml": {
+          "name": "CreateLoanRequest"
+        }
+      },
+      "RejectLoanRequest": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "example": "Buku sedang tidak tersedia"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "xml": {
+          "name": "RejectLoanRequest"
+        }
+      },
+      "ReturnLoanRequest": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "type": "string",
+            "example": "GOOD"
+          },
+          "notes": {}
+        },
+        "required": [
+          "condition"
+        ],
+        "xml": {
+          "name": "ReturnLoanRequest"
+        }
+      },
+      "AdminDashboardStats": {
+        "type": "object",
+        "properties": {
+          "totalBooks": {
+            "type": "number",
+            "example": 100
+          },
+          "totalCategories": {
+            "type": "number",
+            "example": 10
+          },
+          "totalMembers": {
+            "type": "number",
+            "example": 50
+          },
+          "totalPendingLoans": {
+            "type": "number",
+            "example": 5
+          },
+          "totalActiveLoans": {
+            "type": "number",
+            "example": 20
+          },
+          "totalOverdueLoans": {
+            "type": "number",
+            "example": 2
+          },
+          "totalDamagedLoans": {
+            "type": "number",
+            "example": 1
+          },
+          "totalLostLoans": {
+            "type": "number",
+            "example": 0
+          },
+          "overdueLoans": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "dueDate": {
+                  "type": "string",
+                  "example": "2024-01-08T00:00:00Z"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Ahmad"
+                    },
+                    "nis": {
+                      "type": "string",
+                      "example": "12345678"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "nis"
+                  ]
+                },
+                "book": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "example": "Laskar Pelangi"
+                    }
+                  },
+                  "required": [
+                    "title"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "dueDate",
+                "user",
+                "book"
+              ]
+            }
+          }
+        },
+        "required": [
+          "totalBooks",
+          "totalCategories",
+          "totalMembers",
+          "totalPendingLoans",
+          "totalActiveLoans",
+          "totalOverdueLoans",
+          "totalDamagedLoans",
+          "totalLostLoans",
+          "overdueLoans"
+        ],
+        "xml": {
+          "name": "AdminDashboardStats"
+        }
+      },
+      "MemberDashboardStats": {
+        "type": "object",
+        "properties": {
+          "activeLoans": {
+            "type": "number",
+            "example": 2
+          },
+          "activeLoansList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "dueDate": {
+                  "type": "string",
+                  "example": "2024-01-08T00:00:00Z"
+                },
+                "book": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "example": "Laskar Pelangi"
+                    },
+                    "author": {
+                      "type": "string",
+                      "example": "Andrea Hirata"
+                    },
+                    "categoryName": {
+                      "type": "string",
+                      "example": "Fiksi"
+                    }
+                  },
+                  "required": [
+                    "title",
+                    "author",
+                    "categoryName"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "dueDate",
+                "book"
+              ]
+            }
+          },
+          "pendingLoans": {
+            "type": "number",
+            "example": 1
+          },
+          "returnedLoans": {
+            "type": "number",
+            "example": 5
+          },
+          "damagedReturns": {
+            "type": "number",
+            "example": 0
+          },
+          "lostReturns": {
+            "type": "number",
+            "example": 0
+          },
+          "overdueLoans": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "dueDate": {
+                  "type": "string",
+                  "example": "2024-01-08T00:00:00Z"
+                },
+                "book": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "example": "Laskar Pelangi"
+                    },
+                    "coverImage": {}
+                  },
+                  "required": [
+                    "title"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "dueDate",
+                "book"
+              ]
+            }
+          }
+        },
+        "required": [
+          "activeLoans",
+          "activeLoansList",
+          "pendingLoans",
+          "returnedLoans",
+          "damagedReturns",
+          "lostReturns",
+          "overdueLoans"
+        ],
+        "xml": {
+          "name": "MemberDashboardStats"
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Ahmad"
+          },
+          "email": {
+            "type": "string",
+            "example": "ahmad@example.com"
+          },
+          "nis": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "phone": {
+            "type": "string",
+            "example": "08123456789"
+          },
+          "role": {
+            "type": "string",
+            "example": "MEMBER"
+          },
+          "class": {
+            "type": "string",
+            "example": "XII IPA 1"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2024-01-01T00:00:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2024-01-01T00:00:00Z"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "nis",
+          "role",
+          "createdAt",
+          "updatedAt"
+        ],
+        "xml": {
+          "name": "User"
+        }
+      },
+      "CreateUserRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Ahmad"
+          },
+          "email": {
+            "type": "string",
+            "example": "ahmad@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123"
+          },
+          "nis": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "phone": {
+            "type": "string",
+            "example": "08123456789"
+          },
+          "role": {
+            "type": "string",
+            "example": "MEMBER"
+          },
+          "class": {
+            "type": "string",
+            "example": "XII IPA 1"
+          }
+        },
+        "required": [
+          "name",
+          "password",
+          "nis",
+          "role"
+        ],
+        "xml": {
+          "name": "CreateUserRequest"
+        }
+      },
+      "UpdateUserRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Ahmad"
+          },
+          "email": {
+            "type": "string",
+            "example": "ahmad@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123"
+          },
+          "nis": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "phone": {
+            "type": "string",
+            "example": "08123456789"
+          },
+          "role": {
+            "type": "string",
+            "example": "MEMBER"
+          },
+          "class": {
+            "type": "string",
+            "example": "XII IPA 1"
+          }
+        },
+        "xml": {
+          "name": "UpdateUserRequest"
+        }
+      },
+      "ChangePasswordRequest": {
+        "type": "object",
+        "properties": {
+          "oldPassword": {
+            "type": "string",
+            "example": "password123"
+          },
+          "newPassword": {
+            "type": "string",
+            "example": "newpassword123"
+          },
+          "confirmNewPassword": {
+            "type": "string",
+            "example": "newpassword123"
+          }
+        },
+        "required": [
+          "oldPassword",
+          "newPassword",
+          "confirmNewPassword"
+        ],
+        "xml": {
+          "name": "ChangePasswordRequest"
+        }
+      },
+      "ResetPasswordResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Password berhasil di-reset"
+          },
+          "defaultPassword": {
+            "type": "string",
+            "example": "12345678"
+          }
+        },
+        "required": [
+          "message",
+          "defaultPassword"
+        ],
+        "xml": {
+          "name": "ResetPasswordResponse"
+        }
+      }
+    }
+  }
+}
