@@ -47,6 +47,9 @@ services:
     command: sh -c "until npx prisma migrate deploy; do echo 'Waiting for database...'; sleep 2; done"
     env_file:
       - ./backend/.env
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_URL=mysql://app:app@db:3306/libraflow_db
     depends_on:
       db:
         condition: service_healthy
@@ -63,6 +66,9 @@ services:
       - "3555:3555"
     env_file:
       - ./backend/.env
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_URL=mysql://app:app@db:3306/libraflow_db
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:3555/health"]
       interval: 5s
