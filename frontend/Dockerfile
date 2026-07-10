@@ -9,13 +9,14 @@ ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ARG API_URL_INTERNAL
 ENV API_URL_INTERNAL=$API_URL_INTERNAL
 RUN npm run build
+RUN npm prune --omit=dev
 
 # Stage 2: Production Runtime
 FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 COPY package*.json ./
-RUN npm ci --omit=dev
+COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 EXPOSE 3000

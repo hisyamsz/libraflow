@@ -6,13 +6,14 @@ RUN npm ci --ignore-scripts
 COPY . .
 RUN DATABASE_URL="mysql://dummy:dummy@localhost:3306/dummy" npx prisma generate
 RUN DATABASE_URL="mysql://dummy:dummy@localhost:3306/dummy" npm run build
+RUN npm prune --omit=dev --ignore-scripts
 
 # Stage 2: Production Runtime
 FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 COPY package*.json ./
-RUN npm ci --omit=dev --ignore-scripts
+COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
