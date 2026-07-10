@@ -19,16 +19,20 @@ jobs:
           cache-dependency-path: backend/package-lock.json
 
       - name: Install Dependencies
-        run: cd backend && npm ci
+        run: cd backend && npm ci --ignore-scripts
 
       - name: Run Prisma Client Generate
         run: cd backend && npx prisma generate
+        env:
+          DATABASE_URL: mysql://dummy:dummy@localhost:3306/dummy
 
       - name: Run Typecheck
         run: cd backend && npm run typecheck
 
       - name: Run Build
         run: cd backend && npm run build
+        env:
+          DATABASE_URL: mysql://dummy:dummy@localhost:3306/dummy
 
   frontend-ci:
     runs-on: ubuntu-latest
