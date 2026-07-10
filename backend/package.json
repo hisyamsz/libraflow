@@ -55,7 +55,7 @@
     "swagger-autogen": "^2.23.7",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.7",
+    "vitest": "^4.1.10",
     "vitest-mock-extended": "^4.0.0"
   },
   "prisma": {
