@@ -48,8 +48,8 @@ services:
     env_file:
       - ./backend/.env
     environment:
-      - DATABASE_HOST=db
-      - DATABASE_URL=mysql://app:app@db:3306/libraflow_db
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_URL=${DATABASE_URL}
     depends_on:
       db:
         condition: service_healthy
@@ -67,8 +67,8 @@ services:
     env_file:
       - ./backend/.env
     environment:
-      - DATABASE_HOST=db
-      - DATABASE_URL=mysql://app:app@db:3306/libraflow_db
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_URL=${DATABASE_URL}
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:3555/health"]
       interval: 5s
